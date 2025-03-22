@@ -6,9 +6,9 @@ import {useState} from "react"
 export default function CodeEditor()
 {
     const location = useLocation();
-    const question = location.state?.question;
-    const questionExample= location.state?.questionExample;
-    const questionTestCase =location.state?.questionTestCase || [];
+    const question = location.state?.questionTitle;
+    const questionExample= location.state?.example;
+    const questionTestCase =location.state?.testCases || [];
 
 
 

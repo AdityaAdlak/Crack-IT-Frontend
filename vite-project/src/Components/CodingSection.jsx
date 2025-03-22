@@ -14,27 +14,27 @@ export default function CodingSection() {
     console.log("Coding Questions:", selectedSet.codingQuestions);
 
     return (
-        <div className="p-6">
-             <div className="mt-4 space-y-4">
-                {
-                    selectedSet.codingQuestions.map((questionObj)=>{
-                        
-                            const question = questionObj.questionTitle;
-                            const questionExample = questionObj.example;
-                            const questionTestCase = questionObj.testCases;
-                            const questionid = questionObj.questionId
+        <div className="p-6 max-w-3xl mx-auto">
+            <h2 className="text-2xl font-bold text-center mb-6">Coding Questions</h2>
+            
+            <div className="space-y-4">
+                {selectedSet.codingQuestions.map((questionObj) => {
+                    const { questionTitle, example, testCases, questionId } = questionObj;
 
-                        
-                            return(
-
-                        <div key={questionObj.id} className="p-4 border-b cursor-pointer hover:bg-gray-100 rounded-lg" 
-                        onClick={() => navigate(`/code-editor/${questionid}`, { state: { question , questionExample , questionTestCase} })}>
-                            <p className="text-lg font-semibold">{questionObj.questionTitle}</p>
+                    return (
+                        <div 
+                            key={questionId} 
+                            className="p-5 bg-white shadow-md rounded-lg border border-gray-200 cursor-pointer 
+                                       hover:shadow-lg hover:bg-gray-50 transition duration-300"
+                            onClick={() => navigate(`/code-editor/${questionId}`, { 
+                                state: { questionTitle, example, testCases } 
+                            })}
+                        >
+                            <p className="text-lg font-semibold text-gray-800">{questionTitle}</p>
                         </div>
-                            )
-                    })
-                }
-             </div>
+                    );
+                })}
+            </div>
         </div>
-    )
+    );
 }
