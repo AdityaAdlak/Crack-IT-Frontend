@@ -3,6 +3,8 @@ import {useLocation} from "react-router-dom"
 import Editor from "@monaco-editor/react";
 import {useState} from "react"
 import axios from "axios";
+import Loader from "../Components/Loader";
+
 
 export default function CodeEditor()
 {
@@ -18,6 +20,8 @@ export default function CodeEditor()
     const [mode,setMode] = useState("vs-light")
     const [runData, setRunData] = useState(null); 
     const [submitData, setSubmitData] = useState(null);
+    const [isRunning , setIsRunning] = useState(false);
+    const [isSubmitting , setIsSubmitting] = useState(false);
 
 
 
@@ -35,7 +39,7 @@ export default function CodeEditor()
     async function submitHandler() {
         try {
             
-
+            setIsSubmitting(true);
             const testCases = questionTestCase.map(test => ({
                 input: test.input, 
                 expectedOutput: test.expectedOutput 
@@ -57,12 +61,15 @@ export default function CodeEditor()
                     }
                 }
             );
-
+            
             setSubmitData(response.data)
     
             console.log("Response from backend:", response.data);
         } catch (error) {
             console.log("Error in compiling the code...", error.response ? error.response.data : error);
+        }
+        finally{
+            setIsSubmitting(false);
         }
     }
 
@@ -72,7 +79,7 @@ export default function CodeEditor()
 
     async function runHandler() {
         try {
-            
+            setIsRunning(true);
 
             const testCases = visibleTestCases.map(test => ({
                 input: test.input, 
@@ -101,6 +108,9 @@ export default function CodeEditor()
             console.log("Response from backend:", response.data);
         } catch (error) {
             console.log("Error in compiling the code...", error.response ? error.response.data : error);
+        }
+        finally{
+            setIsRunning(false);
         }
     }
     
@@ -201,28 +211,52 @@ export default function CodeEditor()
                 </div>
 
 {/* when i get run data  */}
-                {runData && (
+                {isRunning ? <Loader/> :  runData && (
                     <div className="mt-4 p-4 border rounded-lg bg-gray-50">
                         <h3 className="text-md font-semibold text-gray-700 mb-2">Run Results</h3>
                         <pre className="text-sm bg-gray-100 p-2 rounded-md">
-                            {JSON.stringify(runData, null, 2)}
+                           Passed TestCases :  {JSON.stringify(runData.passedCases, null, 2)}
                         </pre>
+                        <pre className="text-sm bg-gray-100 p-2 rounded-md">
+                           Total TestCases  :  {JSON.stringify(runData.totalCases, null, 2)}
+                        </pre>
+                        <pre className="text-sm bg-gray-100 p-2 rounded-md">
+                           Success Rate     :  {JSON.stringify(runData.successRate, null, 2)}
+                        </pre>
+                        {runData.error && (
+              <p className="text-sm p-2 rounded-md mt-2 text-red-600 bg-red-100 border border-red-300 
+              break-all whitespace-pre-wrap overflow-x-auto">
+              {runData.error}
+          </p>
+          
+            )}
                     </div>
-                )}
+                ) }
 
 {/* when i get submit data run then */}
                 
-                {submitData && (
+                {isSubmitting ? <Loader/> :  submitData && (
                     <div className="mt-4 p-4 border rounded-lg bg-gray-50">
                         <h3 className="text-md font-semibold text-gray-700 mb-2">Submit Results</h3>
                         <pre className="text-sm bg-gray-100 p-2 rounded-md">
-                            {JSON.stringify(submitData, null, 2)}
+                           Passed TestCases :  {JSON.stringify(submitData.passedCases, null, 2)}
                         </pre>
+                        <pre className="text-sm bg-gray-100 p-2 rounded-md">
+                           Total TestCases  :  {JSON.stringify(submitData.totalCases, null, 2)}
+                        </pre>
+                        <pre className="text-sm bg-gray-100 p-2 rounded-md">
+                           Success Rate     :  {JSON.stringify(submitData.successRate, null, 2)}
+                        </pre>
+                        {submitData.error && (
+              <p className="text-sm p-2 rounded-md mt-2 text-red-600 bg-red-100 border border-red-300 
+              break-all whitespace-pre-wrap overflow-x-auto">
+              {submitData.error}
+          </p>
+          
+            )}
                     </div>
                 )}
-            </div>
-
-                
+            </div>  
             </div>
     );
 }

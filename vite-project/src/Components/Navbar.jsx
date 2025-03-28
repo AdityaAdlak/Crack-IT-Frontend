@@ -12,7 +12,7 @@ export default function Navbar() {
     <nav className="bg-[#0a0f1a] text-white shadow-md">
       <div className="container mx-auto px-6 py-4 flex justify-between items-center">
         
-        <div className="text-3xl font-extrabold text-blue-500 transition duration-300">
+        <div className="text-3xl font-extrabold text-blue-500 transition duration-300 ml-15">
           <Link to="/">CrackIT</Link>
         </div>
 
@@ -26,12 +26,12 @@ export default function Navbar() {
 
       
         <div className="hidden md:flex gap-8">
-          <Link
+          {/* <Link
             to="/signUp"
             className="hover:text-blue-500 transition font-medium duration-300"
           >
             Sign Up
-          </Link>
+          </Link> */}
           <Link
             to="/login"
             className="hover:text-blue-500 transition font-medium duration-300"
@@ -56,13 +56,13 @@ export default function Navbar() {
         {isOpen && (
           <div className="absolute top-16 left-0 w-full bg-[#0a0f1a] border-t border-gray-700 md:hidden z-50">
             <div className="flex flex-col gap-6 p-6">
-              <Link
+              {/* <Link
                 to="/signUp"
                 onClick={() => setIsOpen(false)}
                 className="hover:text-[#38bdf8] transition font-medium duration-300"
               >
                 Sign Up
-              </Link>
+              </Link> */}
               <Link
                 to="/login"
                 onClick={() => setIsOpen(false)}

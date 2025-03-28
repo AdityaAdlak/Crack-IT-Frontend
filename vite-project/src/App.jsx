@@ -16,6 +16,7 @@ import ShowCorrectMcq from './Components/ShowCorrectMcq';
 import CodeEditor from './Pages/CodeEditor';
 import AiChecker from './Components/AiChecker';
 import AiResponse from './Components/AiResponse';
+import  CrackITSteps from "./Components/StepSection"
 
 
 
@@ -42,6 +43,7 @@ function App() {
       <Route path="/code-editor/:id" element={<CodeEditor />} ></Route>
       <Route path="/aiResponse/:userAnswerId" element={<AiResponse />} ></Route>
       <Route path="/aiChecker" element={<AiChecker />} ></Route>
+      <Route path="/stepSection" element={<CrackITSteps />} ></Route>
     
     </Routes>
     </div>
