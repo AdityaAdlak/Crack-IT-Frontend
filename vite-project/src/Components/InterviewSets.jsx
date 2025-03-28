@@ -3,7 +3,7 @@
 
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { FaRegQuestionCircle, FaFileAlt, FaCode } from "react-icons/fa"; // Importing icons
+import { FaRegQuestionCircle, FaFileAlt, FaCode } from "react-icons/fa"; 
 
 export default function InterviewSets() {
     const [sets, setSets] = useState([]);
@@ -28,7 +28,7 @@ export default function InterviewSets() {
             const setsWithUUID = uniqueSets.slice(0, 10).map((set, index) => ({
                 ...set,
                 setNumber: index + 1,
-                id: set.setNumber,
+                id: set.setId,
             }));
 
             setSets(setsWithUUID);
@@ -38,6 +38,8 @@ export default function InterviewSets() {
             setLoading(false);
         }
     }
+
+    console.log("In Interview Sets",sets.questionType)
 
 
     return (
@@ -70,7 +72,16 @@ export default function InterviewSets() {
                         <div
                             key={set.id}
                             className="bg-white shadow-lg rounded-xl border border-gray-200 p-6 cursor-pointer hover:shadow-2xl transition transform duration-300 hover:scale-105"
-                            onClick={() => navigate(`/set-details/${set.id}`, { state: { set } })}
+                            
+
+                            onClick={() => {
+                                if (set.setId) {
+                                    navigate(`/set-details/${set.setId}`, { state: { set: set } });
+                                } else {
+                                    console.error("Set ID is undefined:", set);
+                                }
+                            }}
+                            
                         >
                         
                             <div className="flex justify-between items-center">

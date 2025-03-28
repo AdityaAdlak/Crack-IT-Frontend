@@ -21,6 +21,16 @@ export default function CodingSection() {
                 {selectedSet.codingQuestions.map((questionObj) => {
                     const { questionTitle, example, testCases, questionId } = questionObj;
 
+                    const formattedTestCases = testCases.map(tc => ({
+                        input: tc.input,
+                        expectedOutput: tc.expectedOutput ?? "Invalid output"  
+                    }));
+
+
+
+
+
+                    console.log("Formatted Test Cases:", formattedTestCases);
                     return (
                         <div 
                             key={questionId} 

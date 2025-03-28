@@ -14,6 +14,8 @@ import TheorySection from "../src/Components/TheoriticalSection";
 import CodingSection from "../src/Components/CodingSection";
 import ShowCorrectMcq from './Components/ShowCorrectMcq';
 import CodeEditor from './Pages/CodeEditor';
+import AiChecker from './Components/AiChecker';
+import AiResponse from './Components/AiResponse';
 
 
 
@@ -38,6 +40,8 @@ function App() {
       <Route path="/coding/:id" element={<CodingSection />} />
       <Route path="/correctMCQ" element={<ShowCorrectMcq />} />  
       <Route path="/code-editor/:id" element={<CodeEditor />} ></Route>
+      <Route path="/aiResponse/:userAnswerId" element={<AiResponse />} ></Route>
+      <Route path="/aiChecker" element={<AiChecker />} ></Route>
     
     </Routes>
     </div>

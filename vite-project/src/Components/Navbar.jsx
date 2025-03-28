@@ -71,18 +71,19 @@ export default function Navbar() {
                 Login
               </Link>
               <Link
-                to="/aiSearch"
-                onClick={() => setIsOpen(false)}
-                className="hover:text-[#38bdf8] transition font-medium duration-300"
-              >
-                CrackAI
-              </Link>
-              <Link
                 to="/userAnalytics/:id"
                 onClick={() => setIsOpen(false)}
                 className="hover:text-[#38bdf8] transition font-medium duration-300"
               >
                 User Analytics
+              </Link>
+
+              <Link
+                to="/interviewSets"
+                onClick={() => setIsOpen(false)}
+                className="hover:text-[#38bdf8] transition font-medium duration-300"
+              >
+                Interview Sets
               </Link>
             </div>
           </div>
